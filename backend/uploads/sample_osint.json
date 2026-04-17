@@ -1,0 +1,26 @@
+[
+  {
+    "type": "OSINT",
+    "title": "Open Source Report 1",
+    "description": "Intelligence from public sources - Washington DC",
+    "lat": 38.9072,
+    "lng": -77.0369,
+    "image": null
+  },
+  {
+    "type": "OSINT",
+    "title": "Open Source Report 2",
+    "description": "Social media monitoring - San Francisco",
+    "lat": 37.7749,
+    "lng": -122.4194,
+    "image": null
+  },
+  {
+    "type": "OSINT",
+    "title": "Open Source Report 3",
+    "description": "News aggregation - Sydney",
+    "lat": -33.8688,
+    "lng": 151.2093,
+    "image": null
+  }
+]
