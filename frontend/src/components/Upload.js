@@ -24,11 +24,12 @@ function Upload({ onUploadSuccess }) {
     setMessage('');
     setError('');
 
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
     const formData = new FormData();
     formData.append('file', file);
 
     try {
-      const response = await fetch('/api/upload', {
+      const response = await fetch(`${API_URL}/api/upload`, {
         method: 'POST',
         body: formData
       });

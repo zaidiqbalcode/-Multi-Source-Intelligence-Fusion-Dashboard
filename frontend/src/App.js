@@ -4,6 +4,8 @@ import Upload from './components/Upload';
 import Filter from './components/Filter';
 import './App.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 function App() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -18,7 +20,7 @@ function App() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/data');
+      const response = await fetch(`${API_URL}/api/data`);
       const result = await response.json();
       setData(result);
       applyFilters(result, filters);
