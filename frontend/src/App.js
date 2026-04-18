@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Map from './components/Map';
 import Upload from './components/Upload';
 import Filter from './components/Filter';
@@ -15,27 +15,32 @@ function App() {
     IMINT: true
   });
   const [loading, setLoading] = useState(false);
+  const filtersRef = useRef(filters);
+
+  useEffect(() => {
+    filtersRef.current = filters;
+  }, [filters]);
+
+  // Apply filters
+  const applyFilters = useCallback((dataSet, activeFilters) => {
+    const filtered = dataSet.filter(item => activeFilters[item.type]);
+    setFilteredData(filtered);
+  }, []);
 
   // Fetch data from backend
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     try {
       const response = await fetch(`${API_URL}/api/data`);
       const result = await response.json();
       setData(result);
-      applyFilters(result, filters);
+      applyFilters(result, filtersRef.current);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
       setLoading(false);
     }
-  };
-
-  // Apply filters
-  const applyFilters = (dataSet, activeFilters) => {
-    const filtered = dataSet.filter(item => activeFilters[item.type]);
-    setFilteredData(filtered);
-  };
+  }, [applyFilters]);
 
   // Handle filter changes
   const handleFilterChange = (newFilters) => {
@@ -51,7 +56,7 @@ function App() {
   // Initial data load
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <div className="app">

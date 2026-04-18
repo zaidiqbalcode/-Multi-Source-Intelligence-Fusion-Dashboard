@@ -1,6 +1,5 @@
 import React from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup, Tooltip } from 'react-leaflet';
-import L from 'leaflet';
 import './Map.css';
 
 // Color mapping for intelligence types
